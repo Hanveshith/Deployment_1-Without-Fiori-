@@ -1,4 +1,17 @@
 
+# Step By Step Proccess to deploy CAPM ODATA along with XSUAA.
+
+
+## Prerequisites
+
+Create your CAPM with schema, data and expose the enities in your srv folder.
+
+###### **Note** : Writing the required access roles in the srv file helps in automatically adding them in the [**xs-security.json**](https://github.com/Hanveshith/Deployment_1-Without-Fiori-/blob/main/xs-security.json).
+
+
+
+
+
 ## Deployment
 
 #### Step-1 : Add HANA Database configuration
