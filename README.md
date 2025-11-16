@@ -1,25 +1,98 @@
-# Getting Started
 
-Welcome to your new project.
+## Deployment
 
-It contains these folders and files, following our recommended project layout:
+#### Step-1 : Add HANA Database configuration
+```bash
+cds add hana --for production
+```
+* This creates a key-value pair in you package.json.
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`package.json` | project metadata and configuration
-`readme.md` | this getting started guide
+#### Step-2 : Add the xs-security.json file
+```bash
+cds add xsuaa --for production
+```
+* This creates the xs-security.json file with the scopes, attributes and role-templets.
+* Now you need to add the following to configure properly
+
+```json
+"xsappname": "<AnyName>",
+"tenant-mode": "dedicated",
+```
+```json
+"authorities": [
+    "$ACCEPT_GRANTED_AUTHORITIES"
+  ],
+  "oauth2-configuration": {
+    "token-validity": 9000,
+    "redirect-uris": [
+      "https://*.cfapps.us10-001.hana.ondemand.com/login/callback"
+    ]
+  },
+  "xsenableasyncservice": "true"
+  ```
+Refer - [xs-security.json](https://github.com/Hanveshith/Deployment_1-Without-Fiori-/blob/main/xs-security.json)
+
+#### Step-3 : Add the mta.yaml file.
+```bash
+cds add mta
+```
+* Creates an mta.yaml file.
+* Changes to be made in this file are :
+```ymal
+memory: 512M
+disk-quota: 512M
+```
+**Note**: Add this under the parameter section of "<appname>-srv" named module under modules section.
+
+#### Checks
+```Notepad
+1. Check your package.json for hana, xsuaa under cds in production object.
+2. Ensure these following two dependecies are present
+        ->  "@sap/xssec": "^4",
+        ->  "@cap-js/hana": "^2",
+3. Run "npm i" before you build your .mtar file.
+
+```
+
+#### Step-4 : 
+    1. Right click on the .yaml file and click on "Build MTA Project" or execute "mbt build -p cf".
+    2. Wait for the creation of the "mta_archives" folder. Once the .mtar file is available.
+    3. execute "cf deploy mta_archives/*.mtar" to deploy you project.
 
 
-## Next Steps
+### After Successful Deployment.
+    1. You will find two instances created under the instances section in your BTP account.
+        ->  *-auth
+        ->  *-db
+    2. Open your spaces in BTP where you can find the URL of the srv.
+    3. Opening it will display your inital page (contains services, metadata...).
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
+**Note**: Mostly your will get the **403-forbidden** error because of xsuaa.
+
+### Testing
+1. Copy the "*-srv" URL and paste it in your postman and select the "OAuth 2.0" under Authorization.    
+    ![1](https://github.com/Hanveshith/Deployment_1-Without-Fiori-/blob/main/images/1.png?raw=true)
+2. Open the "*-auth" instance from your BTP instances and find the following and store them in notepad.
+    ![2](https://github.com/Hanveshith/Deployment_1-Without-Fiori-/blob/main/images/3.png?raw=true)
 
 
-## Learn More
+    ![3](https://github.com/Hanveshith/Deployment_1-Without-Fiori-/blob/main/images/4.png?raw=true)
+    2. Scroll down and provide 
 
-Learn more at https://cap.cloud.sap/docs/get-started/.
+        -> Token Name
+        -> Access Token URL (from step 2)
+        Note: ADD "/oauth/token" AT THE END OF ABOVE URL
+        -> Client ID (from step 2)
+        -> Username (BTP Account Username)
+        -> Password (BTP Account Password)
+        
+3. Click on "Get New Access Token". This generates a new access token. click on the "Use Token" Button as shown.
+
+    ![4](https://github.com/Hanveshith/Deployment_1-Without-Fiori-/blob/main/images/2.png?raw=true)
+4. Now send the GET request, which will Successfully gets the data from HANA Database.
+
+
+    
+    
+
+
