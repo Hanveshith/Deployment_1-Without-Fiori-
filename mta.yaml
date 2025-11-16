@@ -1,0 +1,63 @@
+_schema-version: 3.3.0
+ID: OrderItems
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+modules:
+  - name: OrderItems-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+      memory: 512M
+      disk-quota: 512M
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: OrderItems-auth
+      - name: OrderItems-db
+
+  - name: OrderItems-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: OrderItems-db
+
+resources:
+  - name: OrderItems-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: OrderItems-${org}-${space}
+        tenant-mode: dedicated
+        role-collections:
+          - name: 'Admin (OrderItems ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Admin'
+          - name: 'Customer (OrderItems ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Customer'
+  - name: OrderItems-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared

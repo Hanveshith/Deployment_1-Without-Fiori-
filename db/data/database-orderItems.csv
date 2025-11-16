@@ -1,0 +1,8 @@
+oiid,name,price,quantity,imageURL,to_orderHeader_hid,createdAt,createdBy,modifiedAt,modifiedBy
+12be7e09-e7bc-404b-bf6e-63a361fb4e85,"Wireless Mouse",25.00,2,https://images.pexels.com/photos/34692800/pexels-photo-34692800.jpeg,550e8400-e29b-41d4-a716-446655440000,"2025-01-20 10:20:00","userA","2025-01-20 11:00:00","userA"
+3363381f-2b7d-424b-9cc2-74b66205e276,"Keyboard",50.00,1,https://images.pexels.com/photos/1772123/pexels-photo-1772123.jpeg,550e8400-e29b-41d4-a716-446655440000,"2025-01-20 10:25:00","userA","2025-01-21 08:00:00","userB"
+
+2f5e4476-4eb2-45a1-b289-25b7cda147a2,"USB-C Cable",9.99,3,https://images.pexels.com/photos/3921704/pexels-photo-3921704.jpeg,550e8400-e29b-41d4-a716-446655440001,"2025-01-22 14:05:00","userA","2025-01-22 14:10:00","userA"
+
+6779c8dc-14ad-4167-87eb-adac8eb14ce1,"SSD 1TB",120.00,2,https://images.pexels.com/photos/2942361/pexels-photo-2942361.jpeg,550e8400-e29b-41d4-a716-446655440002,"2025-01-18 08:50:00","userC","2025-01-18 09:00:00","userC"
+5f9fcc6f-7cda-42f7-befc-2155ecdc9b4d,"Laptop Stand",59.50,1,https://images.pexels.com/photos/8490179/pexels-photo-8490179.jpeg,550e8400-e29b-41d4-a716-446655440002,"2025-01-18 09:10:00","userC","2025-01-19 10:05:00","userD"
