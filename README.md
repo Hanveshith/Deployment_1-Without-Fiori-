@@ -78,8 +78,12 @@ disk-quota: 512M
     1. You will find two instances created under the instances section in your BTP account.
         ->  *-auth
         ->  *-db
-    2. Open your spaces in BTP where you can find the URL of the srv.
-    3. Opening it will display your inital page (contains services, metadata...).
+    2. Before you access the srv URL you must assign the roles to the user.
+    3. Go to role collection in your BTP platform. In here you will find the role collections that are generated automatically based on your "xs-security.json" file.
+    4. Assign that role to the user under the user section of you BTP account.
+    5. Open your spaces in BTP where you can find the URL of the srv.
+    6. Opening it will display your inital page (contains services, metadata...).
+    7. If the intial page is not shown, please refer the possible erros section.
 
 **Note**: Mostly your will get the **403-forbidden** error because of xsuaa.
 
