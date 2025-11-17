@@ -4,7 +4,8 @@
 
 ## Prerequisites
 
-Create your CAPM with schema, data and expose the enities in your srv folder.
+* Create your CAPM with schema, data and expose the enities in your srv folder.
+* Create a HANA Database instace in your BTP.
 
 ###### **Note** : Writing the required access roles in the srv file helps in automatically adding them in the [**xs-security.json**](https://github.com/Hanveshith/Deployment_1-Without-Fiori-/blob/main/xs-security.json).
 
@@ -105,7 +106,14 @@ disk-quota: 512M
 4. Now send the GET request, which will Successfully gets the data from HANA Database.
 
 
-    
+### Possible Errors:
+1. "CANNOT GET" - Run your project in your local environment and copy the /<service-name>/<entity>, and at the end of the URL.
+2. You might run out of space while deploying so make sure you increase the space of your "dev" before deploying.
+3. If you want to see the generated webpage containing the information of your service. Add this to your package.json.
+    -> "server": {
+           "index": true
+        },
+
     
 
 
