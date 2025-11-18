@@ -117,7 +117,7 @@ disk-quota: 512M
 
 
 ### Possible Errors:
-1. "CANNOT GET" - Run your project in your local environment and copy the "**/<SERVICE-NAME>/<ENTITY>**", and at the end of the URL.
+1. "CANNOT GET" - Run your project in your local environment and copy the "**"/<SERVICE-NAME>/<ENTITY>"**", and at the end of the URL.
 2. You might run out of space while deploying so make sure you increase the space of your "dev" before deploying.
 3. If you want to see the generated webpage containing the information of your service. Add this to your package.json.
 
