@@ -69,6 +69,10 @@ disk-quota: 512M
 ```
 
 #### Step-4 : 
+    1. Please login to your cloud foundary account from your cmd. using the following command
+        -> cf login
+        * This asks for your cloud foundary environment URL (can be found in BTP under Overview)
+        * Then enter your BTP account credential to provide access.
     1. Right click on the .yaml file and click on "Build MTA Project" or execute "mbt build -p cf".
     2. Wait for the creation of the "mta_archives" folder. Once the .mtar file is available.
     3. execute "cf deploy mta_archives/*.mtar" to deploy you project.
